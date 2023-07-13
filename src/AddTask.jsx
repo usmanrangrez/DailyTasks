@@ -6,9 +6,7 @@ import CreatedTask from "./CreatedTask";
 
 const AddTask = ({ setCompleted, setTotal, completed }) => {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState(null); // Initialize tasks as null because fir local storage mai empty array store horahi thi.
-  const toast = useToast();
-
+  const [tasks, setTasks] = useState([]);
   const writeTask = (e) => {
     setTask(e.target.value);
   };
@@ -48,16 +46,16 @@ const AddTask = ({ setCompleted, setTotal, completed }) => {
     if (storedTasks) {
       setTasks(JSON.parse(storedTasks));
     }
-  }, []);
+  }, [window]);
 
   useEffect(() => {
-    if (tasks !== null) {
+    if (tasks.length > 0) {
       localStorage.setItem("Todo_tasks", JSON.stringify(tasks));
     }
   }, [tasks]);
 
-  if (tasks === null) {
-    return null;
+  if (tasks.length === 0) {
+    <p>hi</p>;
   }
 
   return (
